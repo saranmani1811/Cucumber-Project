@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import com.baseclass.BaseClass;
+import com.pagemanagers.PageObjectManager;
 
 import io.cucumber.core.api.Scenario;
 import io.cucumber.java.After;
@@ -16,6 +17,7 @@ import io.cucumber.java.Before;
  * @Date 15/08/2022
  */
 public class HooksClass extends BaseClass {
+	PageObjectManager pom = new PageObjectManager();
 
 	/**
 	 * 
@@ -25,8 +27,8 @@ public class HooksClass extends BaseClass {
 	@Before
 	public void beforeSuite() throws FileNotFoundException, IOException {
 
-		getDriverType(getPropertyValue("browser"));
-		loadUrl(getPropertyValue("url"));
+		getDriverType(pom.getLoginPage().getPropertyValue("browser"));
+		loadUrl(pom.getLoginPage().getPropertyValue("url"));
 		maximize();
 	}
 
@@ -35,9 +37,11 @@ public class HooksClass extends BaseClass {
 	 * @param scenario
 	 */
 	@After
-	public void AfterSuite(Scenario scenario) {
-		scenario.embed(screenshotAsByte(), "images/png", "Every Scenario");
-		quit();
+	public void afterSuite(Scenario scenario) {
+		if (scenario.isFailed()) {
+			scenario.embed(screenshotAsByte(), "images/png", "Every Scenario");
+			quit();
+		}
 	}
 
 }

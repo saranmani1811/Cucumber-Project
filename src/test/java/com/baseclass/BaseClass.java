@@ -18,6 +18,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
@@ -497,15 +498,15 @@ public class BaseClass {
 	 */
 	public void dragDrop(WebElement source, WebElement destination) {
 		Actions actions = new Actions(driver);
-		actions.dragAndDrop(source, destination);
+		actions.dragAndDrop(source, destination).perform();
 	}
 
 	/**
 	 * 
 	 * @param url
 	 */
-	public void windowurl(String url) {
-		driver.switchTo().window(url);
+	public void windowurl(String id) {
+		driver.switchTo().window(id);
 	}
 
 	/**
@@ -612,7 +613,7 @@ public class BaseClass {
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 */
-	public String getPropertyValue(String key) throws FileNotFoundException, IOException {
+	public static String getPropertyValue(String key) throws FileNotFoundException, IOException {
 		Properties pro = new Properties();
 		pro.load(new FileInputStream(System.getProperty("user.dir") + "\\config\\config.properties"));
 		Object obj = pro.get(key);
@@ -636,7 +637,7 @@ public class BaseClass {
 			break;
 		case "firefox":
 			WebDriverManager.firefoxdriver().setup();
-			driver = new ChromeDriver();
+			driver = new FirefoxDriver();
 			break;
 		case "edge":
 			WebDriverManager.edgedriver().setup();

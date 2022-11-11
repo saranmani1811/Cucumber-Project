@@ -29,6 +29,7 @@ public class TC1_LoginStep extends BaseClass {
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 */
+	
 	@Given("User is on the login page")
 	public void user_is_on_the_login_page() throws FileNotFoundException, IOException {
 
@@ -45,9 +46,10 @@ public class TC1_LoginStep extends BaseClass {
 	 * @param passWord
 	 * @throws InterruptedException
 	 */
+	
 	@When("User should perform login{string}and{string}")
-	public void user_should_perform_login_and(String userName, String passWord) throws InterruptedException {
-		pom.getLoginPage().login(userName, passWord);
+	public void user_should_perform_login_and(String userName, String password) throws InterruptedException {
+		pom.getLoginPage().login(userName, password);
 
 	}
 
@@ -69,6 +71,7 @@ public class TC1_LoginStep extends BaseClass {
 	 *            to verify invalid login error message
 	 * @param expLoginInvalidErrorMsg
 	 */
+	
 	@Then("User should verify  invalid data error message  {string} after login")
 	public void user_should_verify_invalid_data_error_message_after_login(String expLoginInvalidErrorMsg) {
 

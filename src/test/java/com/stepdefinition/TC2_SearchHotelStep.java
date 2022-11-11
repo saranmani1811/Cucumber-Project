@@ -14,7 +14,6 @@ import io.cucumber.java.en.Then;
  * @Date 14/08/2022
  */
 public class TC2_SearchHotelStep extends BaseClass {
-
 	PageObjectManager pom = new PageObjectManager();
 
 	/**
